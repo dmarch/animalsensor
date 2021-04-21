@@ -3,7 +3,7 @@
 #' @param data Data.frame.
 #' @param locale System time locale.
 #' @param deploymentDateTime POSIXct date time. If NULL, the function will not filter data by date.
-#' @return A data.frame with standardized names and parsed times to accomodate L0 product.
+#' @return A data.frame with standardized names and parsed times from L0 product.
 wcLoc2L0 <- function(data, locale = "English", date_deploy=NULL){
 
   ### Rename columns
@@ -17,13 +17,13 @@ wcLoc2L0 <- function(data, locale = "English", date_deploy=NULL){
   names(data)[names(data)=="Error.Ellipse.orientation"] <- "eor"
 
   # Convert to POSIXct
-  data$date <- lubridate::parse_date_time(data$date, c("HMS dbY", "Ymd HMS"), locale=locale, tz="UTC")
+  data$time <- lubridate::parse_date_time(data$date, c("HMS dbY", "Ymd HMS"), locale=locale, tz="UTC")
 
   # Select data collected from the date of deployment
-  if (!is.null(date_deploy)) data <- dplyr::filter(data, date >= date_deploy)
+  if (!is.null(date_deploy)) data <- dplyr::filter(data, time >= date_deploy)
 
   # Reorder column names
-  data <- dplyr::select(data, id, date, lon, lat, lc, smaj, smin, eor)
+  data <- dplyr::select(data, id, time, lon, lat, lc, smaj, smin, eor)
   return(data)
 }
 
