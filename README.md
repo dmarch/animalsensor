@@ -6,18 +6,14 @@ Read and process animal tracking data from multiple sources.
 
 #### Installation
 
-Install ´animalsensor´ from its
-[GitHub repository](https://github.com/dmarch/animalsensor). First
-install the [remotes](https://github.com/r-lib/remotes) package.
+Install `animalsensor` using the `install_github` function from `devtools`
+package.
 
 ```r
-install.packages("remotes")
+devtools::install_github("dmarch/animalsensor")
 ```
 
-Then install `animalsensor` using the `install_github` function in
-[remotes](https://github.com/r-lib/remotes).
 
-```r
-library(remotes)
-install_github("dmarch/animalsensor")
-```
+#### Acknowledgements
+
+I acknowledge support from the European Union's Horizon 2020 research and innovation programme under the Marie Skłodowska‐Curie grant agreement no 794938. 
