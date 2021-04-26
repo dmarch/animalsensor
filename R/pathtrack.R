@@ -1,4 +1,4 @@
-#' Proces Wildlife Computers location data
+#' Proces Pathtrack location data
 #'
 #' @param txt_file Path to txt file from PathTrack.
 #' @param deploymentDateTime POSIXct date time. If NULL, the function will not filter data by date.

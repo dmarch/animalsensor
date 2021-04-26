@@ -2,7 +2,7 @@
 % Please edit documentation in R/pathtrack.R
 \name{pathTrack2L0}
 \alias{pathTrack2L0}
-\title{Proces Wildlife Computers location data}
+\title{Proces Pathtrack location data}
 \usage{
 pathTrack2L0(txt_file, date_deploy = NULL)
 }
@@ -15,5 +15,5 @@ pathTrack2L0(txt_file, date_deploy = NULL)
 A data.frame with standardized names and parsed times from L0 product.
 }
 \description{
-Proces Wildlife Computers location data
+Proces Pathtrack location data
 }
