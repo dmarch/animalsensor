@@ -26,7 +26,7 @@ filter_dup  <- function (data, step.time = 2/60, step.dist = 0.001){
   ### Remove duplicated locations, based on both time and space criteria
   data <- SDLfilter::dupfilter(data.frame(data), step.time=step.time, step.dist=step.dist, conditional = FALSE)
 
-  ## Back transform data.frame to standar format
+  ## Back transform data.frame to standard format
 
   # Rename columns
   names(data)[names(data)=="DateTime"] <- "time"
@@ -56,12 +56,12 @@ filter_speed  <- function (data, vmax = 10.8, method = 1){
   ## Convert standard format to SDLfilter
 
   # Standardize Location clasess
-  data$lc <- as.character(data$lc)
-  data$lc[data$lc == "A"] <- -1
-  data$lc[data$lc == "B"] <- -2
-  data$lc[data$lc == "Z"] <- -9
-  data$lc[data$lc == "G"] <- 4
-  data$lc <- as.numeric(data$lc)
+  data$argosLC <- as.character(data$argosLC)
+  data$argosLC[data$argosLC == "A"] <- -1
+  data$argosLC[data$argosLC == "B"] <- -2
+  data$argosLC[data$argosLC == "Z"] <- -9
+  data$argosLC[data$argosLC == "G"] <- 4
+  data$argosLC <- as.numeric(data$argosLC)
 
   # Rename columns
   names(data)[names(data)=="time"] <- "DateTime"
@@ -72,9 +72,9 @@ filter_speed  <- function (data, vmax = 10.8, method = 1){
 
 
   ## Filter out values above speed threshold, considering both previous and subsequent positions
-  data <- SDLfilter::ddfilter.speed(data, vmax = vmax, method = method)
+  data <- SDLfilter::ddfilter_speed(data, vmax = vmax, method = method)
 
-  ## Back transform data.frame to standar format
+  ## Back transform data.frame to standard format
 
   # Rename columns
   names(data)[names(data)=="DateTime"] <- "time"
@@ -84,9 +84,9 @@ filter_speed  <- function (data, vmax = 10.8, method = 1){
   names(data)[names(data)=="id"] <- "organismID"
 
   # Standardize Location clasess
-  data$lc[data$lc == -1] <- "A"
-  data$lc[data$lc == -2] <- "B"
-  data$lc[data$lc == 4] <- "G"
+  data$argosLC[data$argosLC == -1] <- "A"
+  data$argosLC[data$argosLC == -2] <- "B"
+  data$argosLC[data$argosLC == 4] <- "G"
 
   ## Prepare output
   return(data)
