@@ -1,4 +1,4 @@
-#' Proces Wildlife Computers location data
+#' Process Wildlife Computers location data
 #'
 #' @param data Data.frame.
 #' @param locale System time locale.

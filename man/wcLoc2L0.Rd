@@ -2,7 +2,7 @@
 % Please edit documentation in R/wc.R
 \name{wcLoc2L0}
 \alias{wcLoc2L0}
-\title{Proces Wildlife Computers location data}
+\title{Process Wildlife Computers location data}
 \usage{
 wcLoc2L0(data, locale = "English", date_deploy = NULL)
 }
@@ -17,5 +17,5 @@ wcLoc2L0(data, locale = "English", date_deploy = NULL)
 A data.frame with standardized names and parsed times from L0 product.
 }
 \description{
-Proces Wildlife Computers location data
+Process Wildlife Computers location data
 }

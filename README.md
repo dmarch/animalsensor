@@ -13,6 +13,12 @@ package.
 devtools::install_github("dmarch/animalsensor")
 ```
 
+#### Internal: to update functions
+
+```r
+roxygen2::roxygenise()
+```
+
 
 #### Acknowledgements
 
