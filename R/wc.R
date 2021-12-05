@@ -6,24 +6,30 @@
 #' @return A data.frame with standardized names and parsed times from L0 product.
 wcLoc2L0 <- function(data, locale = "English", date_deploy=NULL){
 
-  ### Rename columns
-  names(data)[names(data)=="Ptt"] <- "id"
-  names(data)[names(data)=="Date"] <- "date"
-  names(data)[names(data)=="Longitude"] <- "lon"
-  names(data)[names(data)=="Latitude"] <- "lat"
-  names(data)[names(data)=="Quality"] <- "lc"
-  names(data)[names(data)=="Error.Semi.major.axis"] <- "smaj"
-  names(data)[names(data)=="Error.Semi.minor.axis"] <- "smin"
-  names(data)[names(data)=="Error.Ellipse.orientation"] <- "eor"
+  require(dplyr)
 
-  # Convert to POSIXct
-  data$time <- lubridate::parse_date_time(data$date, c("HMS dbY", "Ymd HMS"), locale=locale, tz="UTC")
+  # prepare data
+  data <- data %>%
+    # rename variables
+    dplyr::rename(organismID = Ptt,
+                  longitude = Longitude,
+                  latitude = Latitude,
+                  argosLC = Quality,
+                  time = Date,
+                  argosSemiMajor = Error.Semi.major.axis,
+                  argosSemiMinor = Error.Semi.minor.axis,
+                  argosOrientation = Error.Ellipse.orientation
+    ) %>%
+    # parse date time
+    dplyr::mutate(time = lubridate::parse_date_time(time, c("HMS dbY", "Ymd HMS"), locale=locale, tz = "UTC")) %>%
+    # filter data without coordinates
+    dplyr::filter(!is.na(longitude)) %>%
+    # select variables
+    dplyr::select(organismID, time, longitude, latitude, argosLC, argosSemiMajor, argosSemiMinor, argosOrientation)
 
   # Select data collected from the date of deployment
   if (!is.null(date_deploy)) data <- dplyr::filter(data, time >= date_deploy)
 
-  # Reorder column names
-  data <- dplyr::select(data, id, time, lon, lat, lc, smaj, smin, eor)
+  # return data
   return(data)
 }
-
